@@ -2,7 +2,7 @@
 
 image = document.createElement('img')
 image.crossOrigin="anonymous"
-image.src = "https://raw.githubusercontent.com/martapienkosz/livecoding/main/images/IMG_1606.JPG"
+image.src = "/Users/nyuad/Documents/GitHub/liveCoding/fatema/live_coding_final/images/IMG_1423.JPG"
 loaded = ()=>{
   s0.init({src: image})
   src(s0).out()
@@ -14,16 +14,30 @@ if (image.complete) {
   image.addEventListener('load', loaded)
 }
 
+s0.initImage("/Users/nyuad/Documents/GitHub/liveCoding/fatema/live_coding_final/images/IMG_1606.JPG")
+
+src(s0).out()
 osc(15,0,1).modulate(noise(5,0.1))
   //.repeat(4,4)
   //.scrollX(({time})=>Math.sin(time*0.05),0)
   .out(o1)
 
 // look at the script in this file
-loadScript('/Users/nyuad/Documents/GitHub/liveCoding/fatema/live_coding_final/visuals.js')
+loadScript('/Users/nyuad/Documents/GitHub/liveCoding/fatema/live_coding_final/images.js')
 
-visuals[2]()
-render()
+
+loadScript('/Users/nyuad/Documents/GitHub/liveCoding/fatema/live_coding_final/visuals.js')
+speed=0.2
+visuals[10](5)
+
+hush()
+
+src(o2)
+  .pixelate(10,10)
+  .out(o2)
+
+render(o2)
+
 
 // can use update and switch case with midi:
 var whichVisual = 0
