@@ -28,7 +28,7 @@ loadScript('/Users/nyuad/Documents/GitHub/liveCoding/fatema/live_coding_final/im
 
 loadScript('/Users/nyuad/Documents/GitHub/liveCoding/fatema/live_coding_final/visuals.js')
 speed=0.2
-visuals[10](5)
+visuals[10](3)
 
 hush()
 
@@ -38,14 +38,20 @@ src(o2)
 
 render(o2)
 
+images[0]()
 
 // can use update and switch case with midi:
 var whichVisual = 0
+var whichImage = 0
 update = () =>{
   // very important! only change source once, when necessary
   if (whichVisual != ccActual[0]){
     whichVisual = ccActual[0];
     visuals[whichVisual]()
+  }
+  if (whichImage != ccActual[1]){
+    whichImage = ccActual[1];
+    images[whichImage]()
   }
 }
 
