@@ -1,4 +1,4 @@
-visuals = [
+images = [
   ()=>{s0.initImage("https://raw.githubusercontent.com/fnassar/live_coding_final/main/images/IMG_1606.JPG")},
   ()=>{s0.initImage("https://raw.githubusercontent.com/fnassar/live_coding_final/main/images/IMG_0897.JPG")},
   ()=>{s0.initImage("https://raw.githubusercontent.com/fnassar/live_coding_final/main/images/IMG_1423.JPG")},
