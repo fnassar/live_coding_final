@@ -16,11 +16,14 @@ if (image.complete) {
 
 s0.initImage("/Users/nyuad/Documents/GitHub/liveCoding/fatema/live_coding_final/images/IMG_1606.JPG")
 
+
+images[0]()
 src(s0).out()
-osc(15,0,1).modulate(noise(5,ccActual[0]))
+osc(15,0,1).modulate(noise(5,()=>ccActual[0]))
   //.repeat(4,4)
   //.scrollX(({time})=>Math.sin(time*0.05),0)
   .out(o1)
+
 
 // look at the script in this file
 loadScript('/Users/nyuad/Documents/GitHub/liveCoding/fatema/live_coding_final/images.js')
@@ -38,7 +41,6 @@ src(o2)
 
 render(o2)
 
-images[0]()
 
 // can use update and switch case with midi:
 var whichVisual = 0
