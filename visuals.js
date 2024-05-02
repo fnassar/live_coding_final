@@ -1,7 +1,7 @@
 visuals = [
   ()=>{//0
     src(o2)
-      .modulate(src(o1),[0.01,0.02, 0.03])
+      .modulate(src(o1),0.01)
       .blend(o0,0.1)
     .out(o2)
   },

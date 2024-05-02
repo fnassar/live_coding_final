@@ -17,7 +17,7 @@ if (image.complete) {
 s0.initImage("/Users/nyuad/Documents/GitHub/liveCoding/fatema/live_coding_final/images/IMG_1606.JPG")
 
 src(s0).out()
-osc(15,0,1).modulate(noise(5,0.1))
+osc(15,0,1).modulate(noise(5,ccActual[0]))
   //.repeat(4,4)
   //.scrollX(({time})=>Math.sin(time*0.05),0)
   .out(o1)
@@ -28,7 +28,7 @@ loadScript('/Users/nyuad/Documents/GitHub/liveCoding/fatema/live_coding_final/im
 
 loadScript('/Users/nyuad/Documents/GitHub/liveCoding/fatema/live_coding_final/visuals.js')
 speed=0.2
-visuals[10](3)
+visuals[0](3)
 
 hush()
 
