@@ -6,6 +6,7 @@ do
   d14 $ ccv "0" # ccn 14 # s "midi" -- 0-7 for every build up a random number
   d15 $ ccv "0" # ccn 15 # s "midi" -- 0-7 for every build up a random number
   d12 $ slow 2 $ ccv "0" # ccn 1 # s "midi" -- 1,2,8,9,10,11,12 ->
+  d11 $ slow 2 $ ccv "1" # ccn 0 # s "midi" -- all -> with base notes?
 
 -- background / __beat?
 do
@@ -17,15 +18,16 @@ do
   d3 $ qtrigger $ filterWhen (>=0) $ struct ("0 [1 1] 0 1") $ s "ukghh:2" # gain 0.7
   d4 $ qtrigger $ filterWhen (>=0) $ struct ("0 0 0 1") $ s "ukgclap:5" # gain 0.6
   d12 $ ccv "<0 25> <0 -25> <0 25> <0 -25>" # ccn 1 # s "midi" -- 1,2,8,9,10,11,12 ->
+  -- d13 $ ccv "76" # ccn 2 # s "midi" -- 3
   d15 $ ccv "0" # ccn 15 # s "midi" -- 0-7 for every build up a random number
 
 -- 1st bass drum / roll_the_drums
 do
   d5 $ s "bassdm:1*4" # gain 1.1
   d16 $ ccv "25 -25 0 -25" # ccn 2 # s "midi" -- 1,2,8,9,10,11,12 ->
-  d12 $ ccv "[0 -10 0] 0 [0 10 0] 0" # ccn 8 # s "midi" -- 1,2,8,9,10,11,12 ->
-  -- d13 $ ccv "76" # ccn 2 # s "midi" -- 3
+  d12 $ ccv "0 0 0 [0 0 <10 -10> 0 0]" # ccn 8 # s "midi" -- 1,2,8,9,10,11,12 ->
   d15 $ ccv "8" # ccn 15 # s "midi" -- 0-7 for every build up a random number
+
 
 -- 2nd / okfullscreen_?
 do
