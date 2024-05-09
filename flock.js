@@ -1,6 +1,75 @@
 //IMG_0897.JPG, IMG_1454.JPG, IMG_1605.JPG, IMG_1606.JPG, IMG_3944.JPG, IMG_3980.JPG, IMG_4162.JPG
-loadScript('https://cdn.rawgit.com/fnassar/live_coding_final/main/images01.js')
-// loadScript('https://cdn.rawgit.com/fnassar/live_coding_final/main/visuals0.js')
+loadScript('https://cdn.rawgit.com/fnassar/live_coding_final/main/images0100.js')
+loadScript('https://cdn.rawgit.com/fnassar/live_coding_final/main/blur.js')
+
+osc(15,0,1).modulate(noise(2,()=>cc[0]*127))
+  .repeat(()=>cc[0]*127, ()=>cc[0]*127)
+  //.scrollX(({time})=>Math.sin(time*0.05),0)
+  .out(o1)
+
+// can use update and switch case with midi:
+let whichVisual = 0
+let whichImage = 0
+update = () =>{
+  // very important! only change source once, when necessary
+  if (whichVisual != (cc[15]*127|0)){
+    whichVisual = (cc[15]*127|0);
+    visuals[whichVisual](3,10,0.9);
+  }
+  if (whichImage != (cc[14]*127|0)){
+    whichImage = (cc[14]*127|0);
+    images[whichImage]();
+  }
+}
+
+images[0]()
+
+// hush()
+render(o2)
+
+visuals[0](3,100,0.9)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// clear update
+hush()
+// OR (without stopping visuals all together)
+update = ()=> {}
+
 visuals = [
   ()=>{//0
     src(o2)
@@ -64,7 +133,7 @@ visuals = [
     src(o2)
     .modulate(src(o1),.01)
     .blend(o0,0.5)
-    .modulateScale(osc(2,-0.5,0).kaleid(2).scale(0.5),2,0)
+    .modulateScale(osc(2,-0.5,0).scale(1),2,0)
     // .mult(shape(4, 0.7).scrollX(()=>cc[7]*127))
     .out(o2)
   },
@@ -90,19 +159,19 @@ visuals = [
   //   .mult(shape(4, 0.4).scrollX(()=>cc[1]))
   //   .out(o2)
   // },
-  // ()=>{//9
-  //   src(o2)
-  //   .kaleid(()=>6+Math.sin(time)*0.05)
-  //   .modulate(src(o1),.01)
-  //   .blend(o0,0.5)
-  //   .modulate(noise(0.2,0,1).scale(({time})=>Math.sin(time*1)*2+1),4)
-  //   .add(src(s2).modulateRepeat(osc(10), 3.0, 3.0, 0.5, 0.5),0.2)
-  //   .mult(shape(4, 0.4).scrollX([-0.2,0.2].smooth(0.5)))
-  //   .scrollY(()=>cc[1])
-  //   .modulateRotate(shape(999,0.3,0.5),1)
-  //   // .pixelate(100,100)
-  //   .out(o2)
-  // },
+  ()=>{//9
+    src(o2)
+    .kaleid(()=>6+Math.sin(time)*0.05)
+    .modulate(src(o1),.01)
+    .blend(o0,0.5)
+    .modulate(noise(0.2,0,1).scale(({time})=>Math.sin(time*1)*2+1),4)
+    .add(src(s2).modulateRepeat(osc(10), 3.0, 3.0, 0.5, 0.5),0.2)
+    .mult(shape(4, 0.4).scrollX([-0.2,0.2].smooth(0.5)))
+    .scrollY(()=>cc[1])
+    .modulateRotate(shape(999,0.3,0.5),1)
+    // .pixelate(100,100)
+    .out(o2)
+  },
   (x)=>{//10
     src(o2)
     .kaleid(()=>6+Math.sin(time)*0.05)
@@ -132,52 +201,16 @@ visuals = [
   },
   (a,x,y)=>{//12
     src(o2)
-    .kaleid(()=>6+Math.sin(time)*0.05)
+    // .kaleid(()=>6+Math.sin(time)*0.05)
     .modulate(src(o1),.01)
     .blend(o0,0.6)
-    .modulate(noise(0.2,0,1).scale(({time})=>Math.sin(time*1)*2+1),4)
-    .add(src(s2).modulateRepeat(osc(10), 3.0, 3.0, 0.5, 0.5),0.2)
+    .modulate(noise(0.2,0,1))//scale(({time})=>Math.sin(time*0.5)*2+1),4)
+    .add(src(s2)
+         .modulateRepeat(osc(10), 3.0, 3.0, 0.5, 0.5),0.3)
     // .mult(shape(4, 0.4).scrollX([-0.2,0.2].smooth(0.5)))
-    .scrollY(()=>cc[1])
-    .modulateRotate(shape(999,0.3,0.5),3) // -5
+    .scrollY(()=>cc[10])
+    .modulateRotate(shape(999,0.3,0.5),0.5) // -5
     .mult(shape(4, y))//.scrollX([-0.4,0.4].smooth(0.5).fast(0.5)))
     .out(o2)
   }
 ]
-
-osc(15,0,1).modulate(noise(2,()=>cc[0]*127))
-  .repeat(()=>cc[0]*127, ()=>cc[0]*127)
-  //.scrollX(({time})=>Math.sin(time*0.05),0)
-  .out(o1)
-
-// can use update and switch case with midi:
-let whichVisual = 0
-let whichImage = 0
-update = () =>{
-  // very important! only change source once, when necessary
-  if (whichVisual != (cc[15]*127|0)){
-    whichVisual = (cc[15]*127|0);
-    visuals[whichVisual](3,10,0.9);
-  }
-  if (whichImage != (cc[14]*127|0)){
-    whichImage = (cc[14]*127|0);
-    images[whichImage]();
-  }
-}
-
-
-images[0]()
-
-// hush()
-render(o2)
-
-visuals[12](3,100,0.7)
-
-
-// clear update
-hush()
-// OR (without stopping visuals all together)
-update = ()=> {}
-
-// .add(
-  		// src(o0).scale(0.965)
